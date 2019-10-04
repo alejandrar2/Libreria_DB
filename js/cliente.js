@@ -3,20 +3,21 @@ obtener();
 function obtener() {
 	
 	$.ajax({
-		url:"ajax/gestion-libro.php?accion=obtener",
+		url:"ajax/gestion-cliente.php?accion=obtener",
 		method: 'GET',
 		dataType:'json',
 		success:function(res){
 			console.log(res);
 			for (var i = 0; i < res.length; i++) {
 
-				$("#tabla-libros").append(
+				$("#tabla-clientes").append(
 					`<tr>
       					<th scope="row">${i+1}</th>
-      					<td>${res[i].nombreLibro}</td>
-      					<td>${res[i].nombreAutor}</td>
-      					<td> <button  class="btn btn-outline-success" onclick="editar(${res[i].idLibro});" >Editar</button> </td>
-      					<td><button type="button" class="btn btn-danger" onclick="eliminar(${res[i].idLibro});">Eliminar</button></td>
+      					<td>${res[i].PNombre}</td>
+      					<td>${res[i].PApellido}</td>
+      					<td>${res[i].direccion}</td>
+      					<td>${res[i].numero}</td>
+      					<td><button type="button" class="btn btn-danger" onclick="eliminar(${res[i].idCliente});">Eliminar</button></td>
     				</tr>`
 				);
 			}
@@ -37,7 +38,7 @@ function eliminar(id){
 	var param = { id: id };
 
 	$.ajax({
-		url:"ajax/gestion-libro.php?accion=eliminar",
+		url:"ajax/gestion-cliente.php?accion=eliminar",
 		method:"POST",
 		dataType:'json',
 		data: param,
@@ -51,10 +52,12 @@ function eliminar(id){
 function guardar() {
 
 	var param = {
-		nombre: $("#nombre").val(),
-		ediccion: $("#ediccion").val(),
-		precio: $("#precio").val(),
-		prestar: $("#prestar").val()
+		pnombre: $("#pnombre").val(),
+		snombre: $("#snombre").val(),
+		papellido: $("#papellido").val(),
+		sapellido: $("#sapellido").val()
+		direccion: $("#direccion").val()
+		numeroid: $("#numeroid").val()
 
 	};
 
