@@ -1,9 +1,20 @@
 <?php 
 
 	include_once '../Modelo/clase-registro.php';
+	include_once '../Modelo/clase-libro.php';
 
-	$registro = new Registro(null, null,'12/08/2019',1,1,'disponible',0);
-	echo $registro->addRegistro(2);
+	//metodo normal add
+	//$libro = new Libro(null, "Algebra Lineal",'3ra',500,0);
+	//echo $libro->add();
+
+
+	//metodo normal editar
+	//$libro = new Libro(2, "Algebra Lineal",'7ma',500,0);
+	//echo $libro->editar();
+
+
+	//metodo estatico
+	//echo Libro::remove(1);
 
 
 

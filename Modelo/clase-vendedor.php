@@ -79,35 +79,7 @@
 		}
 
 		public function edite(){
-	ALTER PROCEDURE [dbo].[SP_EDITE_LIBRO]( @idEmpleado INT, @pcMensaje INT OUTPUT)
-AS
-BEGIN 
-    DECLARE @conteo INT;
-	DECLARE @mensajeError VARCHAR(2000);
-	SET @pcMensaje=0;
-	SET @conteo=0;
-	SET @mensajeError='';
 
-/*======================================================================================*/
-	IF @idvendedor='' or @idvendedor IS NULL BEGIN 
-		SET @mensajeError=@mensajeError+CONVERT(varchar,'vendedor,');
-	END
-
-
-	/*======================================================================================*/
-
-	SELECT @conteo=COUNT(*) FROM vendedor WHERE idvendedor= @idvendedor; 
-
-	IF @mensajeError='' AND @conteo > 0 BEGIN 
-		
-		UPDATE vendedor SET idempleado = @idempleado WHERE idvendedor=@idvendedor;
-		SET @pcMensaje=1;
-	END
-	ELSE 
-		BEGIN
-		SET @pcMensaje=0;
-	END
-END
 
 
 		}
@@ -130,6 +102,24 @@ END
     		return json_encode($datos);
 
 		}
+
+		public static function obtenerUno($id){
+			include_once 'conexion.php';
+
+			$sql = "SELECT * FROM vw_infoVendedor WHERE idVendedor='$id'";
+
+			$resultado = $base_de_datos->prepare($sql);
+			$resultado->execute();
+
+			$datos = array();
+
+			foreach ($resultado as $row) {
+				$datos[] = $row; 
+			}
+
+			return json_encode($datos);
+		}
+
 
 	}
 ?>

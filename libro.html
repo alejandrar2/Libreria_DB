@@ -129,7 +129,7 @@
     <tr>
       <th scope="col">N°</th>
       <th scope="col">Nombre</th>
-      <th scope="col">Escritor</th>
+      <th scope="col">Edicion</th>
     </tr>
   </thead>
   <tbody id="tabla-libros">
@@ -165,6 +165,7 @@
           <input id="ediccion" type="" class="form-control" name="">
           <label>Precio</label><br>
           <input id="precio" type="" class="form-control" name="">
+          <input id="id" type="hidden" class="form-control" name="">
           <label>Prestar</label><br>
           <select id="prestar" class="form-control" >
             <option value="1">Si</option>
@@ -176,6 +177,8 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         <button onclick="guardar();" type="button" class="btn btn-primary">Guardar cambios</button>
+        <button onclick="editar();" type="button" class="btn btn-primary">Editar</button>
+
       </div>
     </div>
   </div>

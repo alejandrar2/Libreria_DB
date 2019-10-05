@@ -1,6 +1,6 @@
 <?php
 	
-	class Libro{
+	class Sucursal{
 
 		private $idSucursal;
 		private $nombre;

@@ -9,18 +9,40 @@
 			echo Libro::obtenerLibro();
 		break;
 
+		case 'obtenerUno':
+			echo Libro::obtenerUno($_POST["id"]);
+		break;
+
 		case 'add':
 			$libro = new Libro(null,
 									$_POST['nombre'],
-									$_POST['edicion'],
+									$_POST['ediccion'],
 									$_POST['precio'],
 									$_POST['prestar']
 								
-			);
+			)
+			echo $libro->add();
 
-			$res = $libro->add();
+		break;
 
-			break;
+		case 'editar':
+
+			$libro = new Libro($_POST['id'],
+									$_POST['nombre'],
+									$_POST['ediccion'],
+									$_POST['precio'],
+									$_POST['prestar']
+								
+			)
+			echo $libro->editar();
+			
+		break;
+
+		case 'remove':
+		
+			echo Libro::remove($_POST['id']);
+
+		break;
 		
 		default:
 			# code...

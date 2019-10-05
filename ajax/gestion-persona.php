@@ -29,10 +29,28 @@
 			
 
 			break;
+
+		case 'editar':
+
+			$persona = new Persona($_POST['id'],
+									$_POST['PNombre'],
+									$_POST['SNombre'],
+									$_POST['PApellido'],
+									$_POST['SApellido'],
+									$_POST['direccion'],
+									$_POST['numeroID'],
+								
+			)
+			echo $persona->editar();
+			
+		break;
+
+		case 'remove':
 		
-		default:
-			# code...
-			break;
+			echo persona::remove($_POST['id']);
+
+		break;
+		
 	}
 
 

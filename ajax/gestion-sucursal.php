@@ -4,9 +4,12 @@
 	
 
 	switch ($_GET["accion"]) {
-		
 		case 'obtener':
-			echo sucursal::obtenerSucursal();
+			echo Sucursal::obtenerSucursal();
+		break;
+
+		case 'obtenerUno':
+			echo Sucursal::obtenerUno($_POST["id"]);
 		break;
 
 		case 'add':
