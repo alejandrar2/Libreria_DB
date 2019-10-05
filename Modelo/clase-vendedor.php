@@ -32,13 +32,15 @@
 		
 
 		public function toString(){
-			return "idVededor: " . $this->idVededor . 
+			return "idVendedor: " . $this->idVendedor . 
 				" idPersona: " . $this->idPersona ;
 		}
 
 		public function add(){
 		// specify params - MUST be a variable that can be passed by reference!
-		$misParametros['idEmpleado'] = $this->idEmpleado;
+		include 'conexionP.php';
+
+		$misParametros['idEmpleado'] = $this->idPersona;
 		$misParametros['idVendedor'] = 0;
 		$misParametros['Pcmensaje'] = 0 ;
 
@@ -68,7 +70,7 @@
   		}
  		 	// Output params are now set,
   			//print_r($params);
-  			$this->idVendedor = misParametros['idVendedor'];
+  			//$this->idVendedor = misParametros['idVendedor'];
 			return json_encode($misParametros);
 		}else{
   			die( print_r( sqlsrv_errors(), true));
@@ -116,8 +118,8 @@ END
 		public static function obtenerVendedor(){
 			include_once 'conexion.php';
 
-			$sql = "SELECT * FROM vw_infoVendedor";
-			$res = $conexion->query($sql); 
+			$sql = "SELECT * FROM vw_vendedores";
+			$res = $base_de_datos->query($sql); 
 
 			$datos = [];
 
@@ -125,7 +127,7 @@ END
         		$datos[] = $row;
     		}
 
-    		return $datos;
+    		return json_encode($datos);
 
 		}
 

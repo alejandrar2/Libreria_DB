@@ -1,19 +1,38 @@
 <?php 
 
 	include_once('../Modelo/clase-vendedor.php');
-	
+	include_once('../Modelo/clase-persona.php');
+	include_once('../Modelo/clase-empleado.php');
+
+
 
 	switch ($_GET["accion"]) {
 		case 'obtener':
-			Vendedor::obtenerVendedor();
+			echo Vendedor::obtenerVendedor();
+
 			break;
-			case 'add':
-			$vendedor = new Vendedor(null,
-									$_POST['idEmpleado']
+		case 'add':
 
-			$res = $persona->add();
+			$persona = new Persona(null,
+									$_POST['pnombre'],
+									$_POST['snombre'],
+									$_POST['papellido'],
+									$_POST['sapellido'],
+									$_POST['direccion'],
+									$_POST['numeroid']
+			);
 
-			echo $vendedor->getidVendedor();
+			$persona->add();
+			//echo $persona->getidPersona();
+
+			$empleado = new Empleado(null, $persona->getidPersona() );
+			$empleado->add();
+			//echo $empleado->getidEmpleado();
+
+			$vendedor = new Vendedor(null, $empleado->getidEmpleado() );
+			echo $vendedor->add();
+
+			
 
 
 			break;
