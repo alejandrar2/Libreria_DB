@@ -62,6 +62,7 @@
 
 		public function add(){
 
+			include 'conexionP.php';
 		// specify params - MUST be a variable that can be passed by reference!
 		$misParametros['nombre'] = $this->nombre;
 		$misParametros['edicion'] = $this->edicion;
@@ -174,7 +175,11 @@
 			}
 
 			return json_encode($tours);
-		}		
+		}	
+		
+		public static function addRegistro($cliente){
+
+		}
 
 		
 
