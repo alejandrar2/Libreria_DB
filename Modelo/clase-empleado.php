@@ -37,7 +37,7 @@
 
 		public function add(){
 
-			include_once 'conexionP.php';
+			include'conexionP.php';
 			// specify params - MUST be a variable that can be passed by reference!
 		$misParametros['idPersona'] = $this->idPersona;
 		$misParametros['idEmpleado'] = 0;

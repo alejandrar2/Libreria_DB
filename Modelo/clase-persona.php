@@ -132,7 +132,7 @@
 
   			
   				$this->idPersona = $misParametros['idPersona'];
-  				return $misParametros;
+  				return json_encode($misParametros);
 			}else{
   				die( print_r( sqlsrv_errors(), true));
 			}
