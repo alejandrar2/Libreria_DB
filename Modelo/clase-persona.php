@@ -139,10 +139,95 @@
 		}
 
 		public function edite(){
+ALTER PROCEDURE [dbo].[SP_EDITE_LIBRO]( @PNombre VARCHAR(45), @SNombre VARCHAR(45), @PApellido VARCHAR(45), @SApellido VARCHAR(45), @direccion VARCHAR(45),@numeroId VARCHAR(45),@pcMensaje INT OUTPUT)
+AS
+BEGIN 
+    DECLARE @conteo INT;
+	DECLARE @mensajeError VARCHAR(2000);
+	SET @pcMensaje=0;
+	SET @conteo=0;
+	SET @mensajeError='';
+
+/*======================================================================================*/
+	IF @PNombre='' or @PNombre IS NULL BEGIN 
+		SET @mensajeError=@mensajeError+CONVERT(varchar,'PNombre,');
+	END
+
+	IF @SNombre='' or @SNombre IS NULL BEGIN 
+		SET @mensajeError=@mensajeError+CONVERT(varchar,'PNombre,');
+	END
+
+	IF @PApellido='' or @PApellido IS NULL BEGIN 
+	SET @mensajeError=@mensajeError+CONVERT(varchar,'PApellido,');
+    END
+
+    IF  @SApellido='' or @SApellido IS NULL BEGIN 
+    SET @mensajeError=@mensajeError+CONVERT(varchar,'SApellido,');
+    END
+
+	IF @direccion=0 or @direccion IS NULL BEGIN 
+		SET @mensajeError=@mensajeError+CONVERT(varchar,'direccion,');
+	END
+
+	
+	IF @numeroId =0 or @numeroId  IS NULL BEGIN 
+		SET @mensajeError=@mensajeError+CONVERT(varchar,'numeroId ,');
+	END
+
+	/*======================================================================================*/
+
+	SELECT @conteo=COUNT(*) FROM persona WHERE idpersona= @idpersona; 
+
+	IF @mensajeError='' AND @conteo > 0 BEGIN 
+		
+		UPDATE persona SET PNombre = @PNombre,SNombre= @SNombre,PApellido=@PApellido,SApellido=@SApellido,direccion=@direccion,numeroId=@numeroId WHERE idpersona=@idpersona;
+		SET @pcMensaje=1;
+	END
+	ELSE 
+		BEGIN
+		SET @pcMensaje=0;
+	END
+END
+
 
 		}
 
 		public static function remove($idPersona){
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[SP_REMOVE_PERSONA]( @idpersona INT, @pcMensaje INT OUTPUT)
+AS
+BEGIN 
+    DECLARE @conteo INT;
+	DECLARE @mensajeError VARCHAR(2000);
+	SET @pcMensaje=0;
+	SET @conteo=0;
+	SET @mensajeError='';
+
+/*======================================================================================*/
+	IF @idpersona=0 or @idpersona IS NULL BEGIN 
+		SET @mensajeError=@mensajeError+CONVERT(varchar,'ID de persona');
+	END
+
+
+	/*======================================================================================*/
+
+	SELECT @conteo=COUNT(*) FROM persona WHERE idpersona= @idpersona; 
+
+	IF @mensajeError='' AND @conteo > 0 BEGIN 
+		
+		DELETE FROM persona WHERE idpersona=@idpersona;
+		SET @pcMensaje=1;
+	END
+	ELSE 
+		BEGIN
+		SET @pcMensaje=0;
+	END
+END
+
 
 		}
 

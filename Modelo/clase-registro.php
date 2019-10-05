@@ -86,36 +86,39 @@
 				" multa: " . $this->multa;
 		}
 
-		public function add($idLibro){
-		include_once 'conexionP.php';
+		public function addRegistro($idLibro){
+		
 
-
-		// specify params - MUST be a variable that can be passed by reference!
+		include 'conexionP.php';
+		// specify parame MUST be a variable that can be passed by reference!
 		$misParametros['idLibro'] = $idLibro;
 		$misParametros['fechafin'] = $this->fechafin;
 		$misParametros['idCliente'] = $this->idCliente;
 		$misParametros['idAdministrador'] = $this->idAdministrador;
 		$misParametros['estado'] = $this->estado;
 		$misParametros['idregistro'] = 0;
-		$misParametros['Pcmensaje'] = 0 ;
+		$misParametros['pcmensaje'] = 0 ;
+
+
 
 
 		// Set up the proc params array - be sure to pass the param by reference
 		$parametrosProcedimiento = array(
-  		array(&$misParametros['idLibro'], SQLSRV_PARAM_IN),
+		array(&$misParametros['idLibro'], SQLSRV_PARAM_IN),
   		array(&$misParametros['fechafin'], SQLSRV_PARAM_IN),
   		array(&$misParametros['idCliente'], SQLSRV_PARAM_IN),
   		array(&$misParametros['idAdministrador'], SQLSRV_PARAM_IN),
-  		array(&$misParametros['estado'], SQLSRV_PARAM_IN),
+		array(&$misParametros['estado'], SQLSRV_PARAM_IN),
 		array(&$misParametros['idregistro'], SQLSRV_PARAM_OUT),
-  		array(&$misParametros['Pcmensaje'], SQLSRV_PARAM_OUT)
-       );
+		array(&$misParametros['pcmensaje'], SQLSRV_PARAM_OUT)
+		);
+
 
 
 
 		// EXEC the procedure, {call stp_Create_Item (@Item_ID = ?, @Item_Name = ?)} seems to fail with various errors in my experiments
 		// PREPERARA EL PROCEDIMIENTO
-		$sql = "EXEC SP_ADD_REGISTRO @idLibro = ?, @fechafin= ?, @idCliente= ?, @idAdministrador= ?, @estado= ?, @idregistro= ?, @Pcmensaje = ?  ";
+		$sql = "EXEC SP_ADD_REGISTRO @idLibro = ?, @fechafin= ?, @idCliente= ?, @idAdministrador= ?, @estado= ?, @idregistro= ?, @pcMensaje = ?  ";
 
 		$stmt = sqlsrv_prepare($conn, $sql, $parametrosProcedimiento);
 

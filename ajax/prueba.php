@@ -1,24 +1,12 @@
 <?php 
 
-	include_once 'conexion.php';
+	include_once '../Modelo/clase-registro.php';
 
-if ($_SERVER['REQUEST_METHOD']=='GET') {
+	$registro = new Registro(null, null,'12/08/2019',1,1,'disponible',0);
+	echo $registro->addRegistro(2);
 
-		$sql = "SELECT * FROM vista_libros";
-				
-		$resultado = $base_de_datos->prepare($sql);
-		$resultado ->execute();
 
-		$tours = array();
 
-		foreach ($resultado as $tour) {
-			$tours[] = $tour;
-			
-		}
-
-		echo json_encode($tours);
-
-}
 
 
 

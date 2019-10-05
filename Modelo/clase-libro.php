@@ -152,13 +152,94 @@
 		}
 
 		public function edite(){
+GO
+/****** Object:  StoredProcedure [dbo].[SP_EDITE_LIBRO]    Script Date: 02/10/2019 17:28:01 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[SP_EDITE_LIBRO]( @idLibro INT, @nombre VARCHAR(50), @edicion VARCHAR(50), @prestar SMALLINT, @precio FLOAT, @pcMensaje INT OUTPUT)
+AS
+BEGIN 
+    DECLARE @conteo INT;
+	DECLARE @mensajeError VARCHAR(2000);
+	SET @pcMensaje=0;
+	SET @conteo=0;
+	SET @mensajeError='';
+
+/*======================================================================================*/
+	IF @nombre='' or @nombre IS NULL BEGIN 
+		SET @mensajeError=@mensajeError+CONVERT(varchar,'nombre,');
+	END
+
+	IF @edicion='' or @edicion IS NULL BEGIN 
+		SET @mensajeError=@mensajeError+CONVERT(varchar,'edicion,');
+	END
+
+	IF @prestar IS NULL BEGIN 
+		SET @mensajeError=@mensajeError+CONVERT(varchar,'prestar,');
+	END
+
+	IF @precio=0 or @precio IS NULL BEGIN 
+		SET @mensajeError=@mensajeError+CONVERT(varchar,'precio,');
+	END
+
+	/*======================================================================================*/
+
+	SELECT @conteo=COUNT(*) FROM libro WHERE idLibro= @idLibro; 
+
+	IF @mensajeError='' AND @conteo > 0 BEGIN 
+		
+		UPDATE libro SET nombre = @nombre,edicion= @edicion,prestar=@prestar,precio=@precio WHERE idLibro=@idLibro;
+		SET @pcMensaje=1;
+	END
+	ELSE 
+		BEGIN
+		SET @pcMensaje=0;
+	END
+END
 
 		}
 
 		public static function remove($idLibro){
+GO
+/****** Object:  StoredProcedure [dbo].[SP_REMOVE_LIBRO]    Script Date: 02/10/2019 17:25:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[SP_REMOVE_LIBRO]( @idLibro INT, @pcMensaje INT OUTPUT)
+AS
+BEGIN 
+    DECLARE @conteo INT;
+	DECLARE @mensajeError VARCHAR(2000);
+	SET @pcMensaje=0;
+	SET @conteo=0;
+	SET @mensajeError='';
+
+/*======================================================================================*/
+	IF @idLibro=0 or @idLibro IS NULL BEGIN 
+		SET @mensajeError=@mensajeError+CONVERT(varchar,'ID del libro');
+	END
+
+
+	/*======================================================================================*/
+
+	SELECT @conteo=COUNT(*) FROM libro WHERE idLibro= @idLibro; 
+
+	IF @mensajeError='' AND @conteo > 0 BEGIN 
+		
+		DELETE FROM libro WHERE idLibro=@idLibro;
+		SET @pcMensaje=1;
+	END
+	ELSE 
+		BEGIN
+		SET @pcMensaje=0;
+	END
+END
+
 
 		}
-
 
 		public static function obtenerLibro(){
 			include_once 'conexion.php';
