@@ -1,99 +1,87 @@
 <?php
 
-	class Factura{
+class Factura{
 
-		private $idFacturaEncabezado;
-		private $idCliente;
-		private $idVendedor;
-		private $fecha;
+	private $idFacturaEncabezado;
+	private $idCliente;
+	private $idVendedor;
+	private $fecha;
 
-		public function __construct($idFacturaEncabezado,$idCliente, $idVendedor, $fecha){
+	public function __construct($idFacturaEncabezado,$idCliente, $idVendedor, $fecha){
 
-			$this->pidFacturaEncabezado = $pidFacturaEncabezado;
-			$this->idCliente = $idCliente;
-			$this->idVendedor = $idVendedor;
-			$this->fecha = $fecha;
-		}
-		public function getidFacturaEncabezado(){
-			return $this->idFacturaEncabezado;
-		}
+		$this->idFacturaEncabezado = $idFacturaEncabezado;
+		$this->idCliente = $idCliente;
+		$this->idVendedor = $idVendedor;
+		$this->fecha = $fecha;
+	}
+	public function getidFacturaEncabezado(){
+		return $this->idFacturaEncabezado;
+	}
 
-		public function setidCliente($idFacturaEncabezado){
-			$this->idFacturaEncabezado = $idFacturaEncabezado;
-		}
+	public function setidCliente($idFacturaEncabezado){
+		$this->idFacturaEncabezado = $idFacturaEncabezado;
+	}
 
-		public function getidCliente(){
-			return $this->idCliente;
-		}
+	public function getidCliente(){
+		return $this->idCliente;
+	}
 
-		public function setidCliente($idCliente){
-			$this->idCliente = $idCliente;
-		}
+	public function getidVendedor(){
+		return $this->idVendedor;
+	}
 
-		public function getidVendedor(){
-			return $this->idVendedor;
-		}
+	public function getfecha(){
+		return $this->fecha;
+	}
 
-		public function setidVendedor($idVendedor){
-			$this->idVendedor = $idVendedor;
-		}
+	public function setfecha($fecha){
+		$this->fecha = $fecha;
+	}
 
-		public function getfecha(){
-			return $this->fecha;
-		}
+	function add(){
 
-		public function setfecha($fecha){
-			$this->fecha = $fecha;
-		}
-
-
-		public function toString(){
-			return "idFacturaEncabezado: " . $this->idFacturaEncabezado .
-				"idCliente: " . $this->idCliente . 
-				" idVendedor: " . $this->idVendedor . 
-				" fecha: " . $this->fecha ;
-		}
-
-		public function addFacturaDetalle(){
-		
-			include 'conexionP.php';
+		include 'conexionP.php';
 			// specify parame MUST be a variable that can be passed by reference!
-			$misParametros['cantidad'] = $cantidad;
-			$misParametros['fechafinidCliente'] = $this->fechafinidCliente;
-			$misParametros['descripcion'] = $this->descripcion;
-			$misParametros['idAdministrador'] = $this->idAdministrador;
-			$misParametros['idLibro'] = $this->idLibro;
-			$misParametros['idVendedor'] = 0;
-			$misParametros['pcmensaje'] = 0 ;
-	
-	
-	
-	
+		$misParametros['cliente'] = $this->idCliente;
+		$misParametros['vendedor'] = $this->idVendedor;
+		$misParametros['idFacturaE'] = 0;
+		$misParametros['pcMensaje'] = 0 ;
+
 			// Set up the proc params array - be sure to pass the param by reference
-			$parametrosProcedimiento = array(
-			array(&$misParametros['cantidad'], SQLSRV_PARAM_IN),
-			  array(&$misParametros['fechafinidCliente'], SQLSRV_PARAM_IN),
-			  array(&$misParametros['descripcion'], SQLSRV_PARAM_IN),
-			  array(&$misParametros['idAdministrador'], SQLSRV_PARAM_IN),
-			array(&$misParametros['idLibro'], SQLSRV_PARAM_IN),
-			array(&$misParametros['idVendedor'], SQLSRV_PARAM_OUT),
-			array(&$misParametros['pcmensaje'], SQLSRV_PARAM_OUT)
-			);
+		$parametrosProcedimiento = array(
+			array(&$misParametros['cliente'], SQLSRV_PARAM_IN),
+			array(&$misParametros['vendedor'], SQLSRV_PARAM_IN),
+			array(&$misParametros['idFacturaE'], SQLSRV_PARAM_OUT),
+			array(&$misParametros['pcMensaje'], SQLSRV_PARAM_OUT)
+		);
+
+		$sql = "EXEC SP_ADD_FACTURA_E @cliente = ?, @vendedor= ?, @idFacturaE= ?, @pcMensaje = ?  ";
+
+		$stmt = sqlsrv_prepare($conn, $sql, $parametrosProcedimiento);
 
 
-			// EXEC the procedure, {call stp_Create_Item (@Item_ID = ?, @Item_Name = ?)} seems to fail with various errors in my experiments
-	// PREPERARA EL PROCEDIMIENTO
-	$sql = "EXEC SP_ADD_REGISTRO @cantidad = ?, @fechafinidCliente= ?, @descripcion= ?, @idAdministrador= ?, @idLibro= ?, @idVendedor= ?, @pcMensaje = ?  ";
+		if( !$stmt ) {
+			die( print_r( sqlsrv_errors(), true));
+		}
 
-	$stmt = sqlsrv_prepare($conn, $sql, $parametrosProcedimiento);
+		if(sqlsrv_execute($stmt)){
+			while($res = sqlsrv_next_result($stmt)){
+    
+			}
+  			
+  			$this->idFacturaEncabezado = $misParametros['idFacturaE'];
+			return json_encode($misParametros);
+		}else{
+			die( print_r( sqlsrv_errors(), true));
+		}
+		
+	}
+
 	
-		}
 
-		public function edite(){
+}
 
-		}
 
-		public static function remove($idFacturaEncabezado){
 
-		}
+
 ?>

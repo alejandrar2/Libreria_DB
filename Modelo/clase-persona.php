@@ -1,199 +1,199 @@
 <?php
 
-	class Persona{
+class Persona{
 
-		private $idPersona;
-		private $PNombre;
-		private $SNombre;
-		private $PApellido;
-		private $SApellido;
-		private $direccion;
-		private $numeroID;
+	private $idPersona;
+	private $PNombre;
+	private $SNombre;
+	private $PApellido;
+	private $SApellido;
+	private $direccion;
+	private $numeroID;
 
-		public function __construct($idPersona,$PNombre, $SNombre, $PApellido, $SApellido, $direccion, $numeroID){
+	public function __construct($idPersona,$PNombre, $SNombre, $PApellido, $SApellido, $direccion, $numeroID){
 
-			$this->idPersona = $idPersona;
-			$this->PNombre = $PNombre;
-			$this->SNombre = $SNombre;
-			$this->PApellido = $PApellido;
-			$this->SApellido = $SApellido;
-			$this->direccion = $direccion;
-			$this->numeroID = $numeroID;
-		}
-		public function getidPersona(){
-			return $this->idPersona;
-		}
+		$this->idPersona = $idPersona;
+		$this->PNombre = $PNombre;
+		$this->SNombre = $SNombre;
+		$this->PApellido = $PApellido;
+		$this->SApellido = $SApellido;
+		$this->direccion = $direccion;
+		$this->numeroID = $numeroID;
+	}
+	public function getidPersona(){
+		return $this->idPersona;
+	}
 
-		public function setidPersona($idPersona){
-			$this->idPersona = $idPersona;
-		}
+	public function setidPersona($idPersona){
+		$this->idPersona = $idPersona;
+	}
 
-		public function getPNombre(){
-			return $this->PNombre;
-		}
+	public function getPNombre(){
+		return $this->PNombre;
+	}
 
-		public function setPNombre($PNombre){
-			$this->PNombre = $PNombre;
-		}
+	public function setPNombre($PNombre){
+		$this->PNombre = $PNombre;
+	}
 
-		public function getSNombre(){
-			return $this->SNombre;
-		}
+	public function getSNombre(){
+		return $this->SNombre;
+	}
 
-		public function setSNombre($SNombre){
-			$this->SNombre = $SNombre;
-		}
+	public function setSNombre($SNombre){
+		$this->SNombre = $SNombre;
+	}
 
-		public function getPApellido(){
-			return $this->PApellido;
-		}
+	public function getPApellido(){
+		return $this->PApellido;
+	}
 
-		public function setPApellido($PApellido){
-			$this->PApellido = $PApellido;
-		}
+	public function setPApellido($PApellido){
+		$this->PApellido = $PApellido;
+	}
 
-		public function getSApellido(){
-			return $this->SApellido;
-		}
+	public function getSApellido(){
+		return $this->SApellido;
+	}
 
-		public function setSApellido($SApellido){
-			$this->SApellido = $SApellido;
-		}
+	public function setSApellido($SApellido){
+		$this->SApellido = $SApellido;
+	}
 
-		public function getdireccion(){
-			return $this->direccion;
-		}
+	public function getdireccion(){
+		return $this->direccion;
+	}
 
-		public function setdireccion($direccion){
-			$this->direccion = $direccion;
-		}
+	public function setdireccion($direccion){
+		$this->direccion = $direccion;
+	}
 
-		public function getnumeroID(){
-			return $this->numeroID;
-		}
+	public function getnumeroID(){
+		return $this->numeroID;
+	}
 
-		public function setnumeroID($numeroID){
-			$this->numeroID = $numeroID;
-		}
+	public function setnumeroID($numeroID){
+		$this->numeroID = $numeroID;
+	}
 
-		public function toString(){
-			return "idPersona: " . $this->idPersona .
-				"PNombre: " . $this->PNombre . 
-				" SNombre: " . $this->SNombre . 
-				" PApellido: " . $this->PApellido . 
-				" SApellido: " . $this->SApellido . 
-				" direccion: " . $this->direccion . 
-				" numeroID: " . $this->numeroID;
-		}
+	public function toString(){
+		return "idPersona: " . $this->idPersona .
+		"PNombre: " . $this->PNombre . 
+		" SNombre: " . $this->SNombre . 
+		" PApellido: " . $this->PApellido . 
+		" SApellido: " . $this->SApellido . 
+		" direccion: " . $this->direccion . 
+		" numeroID: " . $this->numeroID;
+	}
 
-		public function add(){
-			include_once 'conexionP.php';
+	public function add(){
+		include_once 'conexionP.php';
 			// specify params - MUST be a variable that can be passed by reference!
-			$misParametros['PNombre'] = $this->PNombre;
-			$misParametros['SNombre'] = $this->SNombre;
-			$misParametros['PApellido'] = $this->PApellido;
-			$misParametros['SApellido'] = $this->SApellido;
-			$misParametros['direccion'] = $this->direccion;
-			$misParametros['numerodeID'] = $this->numeroID;
-			$misParametros['Pcmensaje'] = 0 ;
-			$misParametros['idPersona'] = 0;
-
-
-			// Set up the proc params array - be sure to pass the param by reference
-			$parametrosProcedimiento = array(
-  				array(&$misParametros['PNombre'], SQLSRV_PARAM_IN),
-  				array(&$misParametros['SNombre'], SQLSRV_PARAM_IN),
-  				array(&$misParametros['SApellido'], SQLSRV_PARAM_IN),
-  				array(&$misParametros['SApellido'], SQLSRV_PARAM_IN),
-  				array(&$misParametros['direccion'], SQLSRV_PARAM_IN),
-  				array(&$misParametros['numerodeID'], SQLSRV_PARAM_IN),
-  				array(&$misParametros['Pcmensaje'], SQLSRV_PARAM_OUT),
-  				array(&$misParametros['idPersona'], SQLSRV_PARAM_OUT)
-			);
-
-
-
-			// EXEC the procedure, {call stp_Create_Item (@Item_ID = ?, @Item_Name = ?)} seems to fail with various errors in my experiments
-			// PREPERARA EL PROCEDIMIENTO
-			$sql = "EXEC SP_ADD_PERSONA @PNombre = ?, @SNombre= ?, @PApellido= ?, @SApellido= ?, @direccion= ?, @numerodeID= ?, @Pcmensaje = ?, @idPersona= ?  ";
-
-			$stmt = sqlsrv_prepare($conn, $sql, $parametrosProcedimiento);
-
-			if( !$stmt ) {
-				die( print_r( sqlsrv_errors(), true));
-			}
-
-			if(sqlsrv_execute($stmt)){
- 				while($res = sqlsrv_next_result($stmt)){
-    		// make sure all result sets are stepped through, since the output params may not be set until this happens
-  			}
-  			// Output params are now set,
-  			//print_r($params);
-
-  			
-  				$this->idPersona = $misParametros['idPersona'];
-  				return json_encode($misParametros);
-			}else{
-  				die( print_r( sqlsrv_errors(), true));
-			}
-		}
-
-		public function editar(){
-			include 'conexionP.php';
-		// specify params - MUST be a variable that can be passed by reference!
 		$misParametros['PNombre'] = $this->PNombre;
 		$misParametros['SNombre'] = $this->SNombre;
 		$misParametros['PApellido'] = $this->PApellido;
 		$misParametros['SApellido'] = $this->SApellido;
 		$misParametros['direccion'] = $this->direccion;
-		$misParametros['numeroID'] = $this->numeroID;
+		$misParametros['numerodeID'] = $this->numeroID;
+		$misParametros['Pcmensaje'] = 0 ;
 		$misParametros['idPersona'] = 0;
+
+
+			// Set up the proc params array - be sure to pass the param by reference
+		$parametrosProcedimiento = array(
+			array(&$misParametros['PNombre'], SQLSRV_PARAM_IN),
+			array(&$misParametros['SNombre'], SQLSRV_PARAM_IN),
+			array(&$misParametros['SApellido'], SQLSRV_PARAM_IN),
+			array(&$misParametros['SApellido'], SQLSRV_PARAM_IN),
+			array(&$misParametros['direccion'], SQLSRV_PARAM_IN),
+			array(&$misParametros['numerodeID'], SQLSRV_PARAM_IN),
+			array(&$misParametros['Pcmensaje'], SQLSRV_PARAM_OUT),
+			array(&$misParametros['idPersona'], SQLSRV_PARAM_OUT)
+		);
+
+
+
+			// EXEC the procedure, {call stp_Create_Item (@Item_ID = ?, @Item_Name = ?)} seems to fail with various errors in my experiments
+			// PREPERARA EL PROCEDIMIENTO
+		$sql = "EXEC SP_ADD_PERSONA @PNombre = ?, @SNombre= ?, @PApellido= ?, @SApellido= ?, @direccion= ?, @numerodeID= ?, @Pcmensaje = ?, @idPersona= ?  ";
+
+		$stmt = sqlsrv_prepare($conn, $sql, $parametrosProcedimiento);
+
+		if( !$stmt ) {
+			die( print_r( sqlsrv_errors(), true));
+		}
+
+		if(sqlsrv_execute($stmt)){
+			while($res = sqlsrv_next_result($stmt)){
+    		// make sure all result sets are stepped through, since the output params may not be set until this happens
+			}
+  			// Output params are now set,
+  			//print_r($params);
+
+
+			$this->idPersona = $misParametros['idPersona'];
+			return json_encode($misParametros);
+		}else{
+			die( print_r( sqlsrv_errors(), true));
+		}
+	}
+
+	public function editar(){
+		include 'conexionP.php';
+		// specify params - MUST be a variable that can be passed by reference!
+		$misParametros['idPersona'] = $this->idPersona;
+		$misParametros['PNombre'] = $this->PNombre;
+		$misParametros['SNombre'] = $this->SNombre;
+		$misParametros['PApellido'] = $this->PApellido;
+		$misParametros['SApellido'] = $this->SApellido;
+		$misParametros['direccion'] = $this->direccion;
+		$misParametros['numerodeID'] = $this->numeroID;
 		$misParametros['PcMensaje'] = 0 ;
 
 
 		// Set up the proc params array - be sure to pass the param by reference
 		$parametrosProcedimiento = array(
-		array(&$misParametros['PNombre'], SQLSRV_PARAM_IN),
-  		array(&$misParametros['SNombre'], SQLSRV_PARAM_IN),
-  		array(&$misParametros['PApellido'], SQLSRV_PARAM_IN),
-  		array(&$misParametros['SApellido'], SQLSRV_PARAM_IN),
-  		array(&$misParametros['direccion'], SQLSRV_PARAM_IN),
-  		array(&$misParametros['numeroID'], SQLSRV_PARAM_IN),
-		array(&$misParametros['idPersona'], SQLSRV_PARAM_OUT),
-  		array(&$misParametros['PcMensaje'], SQLSRV_PARAM_OUT)
+			array(&$misParametros['idPersona'], SQLSRV_PARAM_IN),
+			array(&$misParametros['PNombre'], SQLSRV_PARAM_IN),
+			array(&$misParametros['SNombre'], SQLSRV_PARAM_IN),
+			array(&$misParametros['PApellido'], SQLSRV_PARAM_IN),
+			array(&$misParametros['SApellido'], SQLSRV_PARAM_IN),
+			array(&$misParametros['direccion'], SQLSRV_PARAM_IN),
+			array(&$misParametros['numerodeID'], SQLSRV_PARAM_IN),
+			array(&$misParametros['PcMensaje'], SQLSRV_PARAM_OUT)
 		);
 
 
 
 		// EXEC the procedure, {call stp_Create_Item (@Item_ID = ?, @Item_Name = ?)} seems to fail with various errors in my experiments
 		// PREPERARA EL PROCEDIMIENTO
-		$sql = "EXEC SP_EDITE_LIBRO @PNombre = ?, @SNombre= ?, @PApellido= ?, @SApellido= ?, @direccion, @numeroID, @idLibro= ?, @PcMensaje = ?  ";
+		$sql = "EXEC SP_EDITE_PERSONA @idPersona = ?, @PNombre = ?, @SNombre= ?, @PApellido= ?, @SApellido = ?, @direccion = ?, @numerodeID = ?, @PcMensaje = ?  ";
 
 		$stmt = sqlsrv_prepare($conn, $sql, $parametrosProcedimiento);
 
 		if( !$stmt ) {
-		die( print_r( sqlsrv_errors(), true));
+			die( print_r( sqlsrv_errors(), true));
 		}
 
 		if(sqlsrv_execute($stmt)){
-  			while($res = sqlsrv_next_result($stmt)){
+			while($res = sqlsrv_next_result($stmt)){
     		// make sure all result sets are stepped through, since the output params may not be set until this happens
-  		}
+			}
   			// Output params are now set,
   			//print_r($params);
 			return json_encode($misParametros);
 		}else{
-  			die( print_r( sqlsrv_errors(), true));
+			die( print_r( sqlsrv_errors(), true));
 		}
 	}
 
 
 
-		}	
+	
 
 
-		public static function remove($id){
-			include 'conexionP.php';
+	public static function remove($id){
+		include 'conexionP.php';
 		// specify params - MUST be a variable that can be passed by reference!
 		$misParametros['idPersona'] = $id;
 		$misParametros['PcMensaje'] = 0 ;
@@ -202,7 +202,7 @@
 		// Set up the proc params array - be sure to pass the param by reference
 		$parametrosProcedimiento = array(
 			array(&$misParametros['idPersona'], SQLSRV_PARAM_IN),
-  			array(&$misParametros['PcMensaje'], SQLSRV_PARAM_OUT)
+			array(&$misParametros['PcMensaje'], SQLSRV_PARAM_OUT)
 		);
 
 		$sql = "EXEC SP_REMOVE_PERSONA @idPersona = ?, @Pcmensaje = ?  ";
@@ -210,37 +210,53 @@
 		$stmt = sqlsrv_prepare($conn, $sql, $parametrosProcedimiento);
 
 		if( !$stmt ) {
-		die( print_r( sqlsrv_errors(), true));
+			die( print_r( sqlsrv_errors(), true));
 		}
 
 		if(sqlsrv_execute($stmt)){
-  			while($res = sqlsrv_next_result($stmt)){
+			while($res = sqlsrv_next_result($stmt)){
     		// make sure all result sets are stepped through, since the output params may not be set until this happens
-  		}
+			}
   			// Output params are now set,
   			//print_r($params);
 			return json_encode($misParametros);
 		}else{
-  			die( print_r( sqlsrv_errors(), true));
+			die( print_r( sqlsrv_errors(), true));
 		}
 
 
 
+	}
+
+
+	public static function obtenerUno($id){
+		include_once 'conexion.php';
+
+		$sql = "SELECT * FROM persona WHERE idPersona='$id'";
+		$res = $base_de_datos->query($sql); 
+
+		foreach ($res as $row) {
+			$dato = $row;
 		}
 
-		public static function obtenerUltmoId(){
-			include_once 'conexion.php';
+		return json_encode($dato);
 
-			$sql = "SELECT MAX(idPersona) FROM persona";
-			$res = $conexion->query($sql); 
+	}
 
-    		foreach ($res as $row) {
-        		$dato = $row;
-    		}
 
-    		return $dato;
+	public static function obtenerUltmoId(){
+		include_once 'conexion.php';
 
+		$sql = "SELECT MAX(idPersona) FROM persona";
+		$res = $base_de_datos->query($sql); 
+
+		foreach ($res as $row) {
+			$dato = $row;
 		}
-	}		
+
+		return json_encode($dato);
+
+	}
+}		
 
 ?>

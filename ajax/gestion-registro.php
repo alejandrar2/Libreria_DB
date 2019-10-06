@@ -6,27 +6,21 @@
 
 	switch ($_GET["accion"]) {
 		case 'obtener':
-			Registro::obtenerRegistro();
-			break;
+			echo Registro::obtenerRegistro();
+		break;
 
 		case 'add':
 			
 			$registro = new Registro(null,null,
 									$_POST['fechafin'],
-									$_POST['cliente'],
-									$_POST['admi'],
+									intval($_POST['cliente']),
+									intval($_POST['admi']),
 									$_POST['estado'],
 									null
 					                
 			);
 
-			//$res = $registro->add($_POST['idLibro']);
-			//echo $registro->getidregistro();
-
-			echo json_encode($_POST);
-			
-
-			
+			echo $registro->addRegistro($_POST['libro']);			
 
 			break;
 		

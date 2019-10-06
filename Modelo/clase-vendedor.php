@@ -84,9 +84,52 @@
 
 		}
 
-		public static function remove($idVededor){
+		public static function remove($id){
+		include 'conexionP.php';
+		// specify params - MUST be a variable that can be passed by reference!
+		$misParametros['idVendedor'] = $id;
+		$misParametros['PcMensaje'] = 0 ;
 
+
+		// Set up the proc params array - be sure to pass the param by reference
+		$parametrosProcedimiento = array(
+			array(&$misParametros['idVendedor'], SQLSRV_PARAM_IN),
+			array(&$misParametros['PcMensaje'], SQLSRV_PARAM_OUT)
+		);
+
+		$sql = "EXEC SP_REMOVE_VENDEDOR @idVendedor = ?, @PcMensaje = ?  ";
+
+		$stmt = sqlsrv_prepare($conn, $sql, $parametrosProcedimiento);
+
+		if( !$stmt ) {
+			die( print_r( sqlsrv_errors(), true));
 		}
+
+		if(sqlsrv_execute($stmt)){
+			while($res = sqlsrv_next_result($stmt)){
+    		// make sure all result sets are stepped through, since the output params may not be set until this happens
+			}
+  			// Output params are now set,
+  			//print_r($params);
+			return json_encode($misParametros);
+		}else{
+			die( print_r( sqlsrv_errors(), true));
+		}
+
+
+
+	}
+
+
+
+
+
+
+
+
+
+
+
 		public static function obtenerVendedor(){
 			include_once 'conexion.php';
 

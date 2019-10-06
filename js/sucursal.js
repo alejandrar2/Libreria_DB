@@ -12,15 +12,15 @@ function obtener() {
 			for (var i = 0; i < res.length; i++) {
 
 				$("#tabla_sucursal").append(
-					`<tr>
-      					<th scope="row">${i+1}</th>
-      					<td>${res[i].nombre}</td>
-      					<td>${res[i].direccion}</td>
-      					<td>${res[i].telefono}</td>
-      					<td> <button  class="btn btn-outline-success" onclick="informacion(${res[i].idSucursal});" >Editar</button> </td>
-      					<td><button type="button" class="btn btn-danger" onclick="eliminar(${res[i].idSucursal});">Eliminar</button></td>
-    				</tr>`
-				);
+					`<tr id="${res[i].idSucursal}" >
+					<th scope="row">${i+1}</th>
+					<td>${res[i].nombre}</td>
+					<td>${res[i].direccion}</td>
+					<td>${res[i].telefono}</td>
+					<td> <button  class="btn btn-outline-success" onclick="informacion(${res[i].idSucursal});" >Editar</button> </td>
+					<td><button type="button" class="btn btn-danger" onclick="eliminar(${res[i].idSucursal});">Eliminar</button></td>
+					</tr>`
+					);
 			}
 			
 		}
@@ -46,7 +46,28 @@ function editar(id){
 		dataType:'json',
 		data: param,
 		success:function(res){
+			
 			console.log(res);
+
+			if (res.pcMensaje==1) {
+
+				$("#"+param.id).html(
+					`   <th scope="row">${res.idSucursal}</th>
+					<td>${param.nombre}</td>
+					<td>${param.direccion}</td>
+					<td>${param.telefono}</td>
+					<td> <button  class="btn btn-outline-success" onclick="informacion(${res.idSucursal});">Editar</button> </td>
+					<td><button type="button" class="btn btn-danger" onclick="eliminar(${res.idSucursal});">Eliminar</button></td>`
+					);
+
+				$('#exampleModal').modal('hide');
+
+				alert("Registro actualizado");
+
+			} else {
+				alert("Error");
+
+			}
 			
 		}
 	});
@@ -60,18 +81,28 @@ function eliminar(id){
 	var param = { id: id };
 
 	$.ajax({
-		url:"ajax/gestion-sucursal.php?accion=eliminar",
+		url:"ajax/gestion-sucursal.php?accion=remove",
 		method:"POST",
 		dataType:'json',
 		data: param,
 		success:function(res){
 			console.log(res);
+
+			if (res.pcMensaje==1) {
+
+				alert("Registro eliminado");
+				$("#"+param.id).remove();
+
+			} else {
+				alert("Error");
+
+			}
 			
 		}
 	});
 }
 
-function guardar() {
+function agregar() {
 
 	var param = {
 		nombre: $("#nombre").val(),
@@ -89,7 +120,33 @@ function guardar() {
 		dataType:'json',
 		data: param,
 		success:function(res){
+			
 			console.log(res);
+
+			if (res.Pcmensaje==1) {
+
+				$("#tabla_sucursal").append(
+					`<tr id="${res.idSucursal}">
+					<th scope="row">${res.idSucursal}</th>
+					<td>${param.nombre}</td>
+					<td>${param.direccion}</td>
+					<td>${param.telefono}</td>
+					<td> <button  class="btn btn-outline-success" onclick="informacion(${res.idSucursal});">Editar</button> </td>
+					<td><button type="button" class="btn btn-danger" onclick="eliminar(${res.idSucursal});">Eliminar</button></td>
+					</tr>`
+
+
+					);
+
+				$('#exampleModal').modal('hide');
+
+				alert("Registro actualizado");
+
+			} else {
+				alert("error");
+
+			}
+
 			
 		}
 	});
@@ -103,6 +160,8 @@ function limpiar(){
 	$("#telefono").val(" ");
 	$("#correo").val(" ");
 }
+
+
 
 function informacion(idSucursal){
 	$('#exampleModal').modal('show');
@@ -124,9 +183,17 @@ function informacion(idSucursal){
 				$("#direccion").val(res[0].direccion);
 				$("#telefono").val(res[0].telefono);
 				$("#correo").val(res[0].correo);
-				$("#id").val(res[0].idSucursal),
-			} else {}
-						
+				$("#id").val(idSucursal);
+			} 
+
 		}
 	});
+}
+
+function limpiar() {
+	$("#nombre").val("");
+	$("#direccion").val("");
+	$("#telefono").val("");
+	$("#correo").val("");
+	$("#id").val("");
 }

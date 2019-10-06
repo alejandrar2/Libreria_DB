@@ -1,6 +1,8 @@
 <?php 
 
 	include_once('../Modelo/clase-libro.php');
+	include_once('../Modelo/clase-facturaEncabezado.php');
+	include_once('../Modelo/clase-facturaDetalle.php');
 	
 
 	switch ($_GET["accion"]) {
@@ -21,7 +23,7 @@
 									$_POST['prestar']
 								
 			);
-			echo $libro->add();
+			echo $libro->add($_POST['autor']);
 
 		break;
 
@@ -47,7 +49,30 @@
 		case 'infoLibro':
 		   echo	Libro::infoLibro();
 		
-			break;
+		break;
+
+		case 'generarFactura':
+		
+		   $factura = new Factura(null, $_POST['cliente'], $_POST['vendedor'], null);
+		   $factura->add();
+
+		   $factura->getidFacturaEncabezado();
+
+		   $facturaD = new FacturaDetalle(null, 1, $factura->getidFacturaEncabezado(), $_POST['libro'] );
+
+		   $facturaD->add();
+		   $facturaD->getidFacturaDetalle();
+
+		   $pago = FacturaDetalle::addPago($_POST['libro']);
+		   
+		   $factura->getidFacturaEncabezado();
+
+		   echo FacturaDetalle::pagoFactura( $pago, $factura->getidFacturaEncabezado() );
+
+
+
+		
+		break;
 	}
 
 

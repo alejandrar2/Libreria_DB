@@ -32,8 +32,12 @@
 			$vendedor = new Vendedor(null, $empleado->getidEmpleado() );
 			echo $vendedor->add();
 
+			break;
+
+		case 'remove':
 			
 
+			echo Vendedor::remove($_POST["id"]);
 
 			break;
 		

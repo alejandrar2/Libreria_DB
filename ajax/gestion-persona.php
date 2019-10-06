@@ -8,7 +8,12 @@
 	switch ($_GET["accion"]) {
 		case 'obtener':
 			Persona::obtenerUltmoId();
-			break;
+		break;
+
+		case 'uno':
+			echo Persona::obtenerUno($_POST["id"]);
+		break;
+
 
 		case 'add':
 			$persona = new Persona(null,
@@ -33,14 +38,14 @@
 		case 'editar':
 
 			$persona = new Persona($_POST['id'],
-									$_POST['PNombre'],
-									$_POST['SNombre'],
-									$_POST['PApellido'],
-									$_POST['SApellido'],
+									$_POST['snombre'],
+									$_POST['pnombre'],
+									$_POST['papellido'],
+									$_POST['sapellido'],
 									$_POST['direccion'],
-									$_POST['numeroID'],
+									$_POST['numeroid']
 								
-			)
+			);
 			echo $persona->editar();
 			
 		break;

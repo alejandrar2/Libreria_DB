@@ -147,11 +147,13 @@
 		public static function remove($idregistro){
 
 		}
+
+
 		public static function obtenerRegistro(){
 			include_once 'conexion.php';
 
-			$sql = "SELECT * FROM vw_infoempleado";
-			$res = $conexion->query($sql); 
+			$sql = "SELECT * FROM vista_registro";
+			$res = $base_de_datos->query($sql); 
 
 			$datos = [];
 
@@ -159,7 +161,7 @@
         		$datos[] = $row;
     		}
 
-    		return $datos;
+    		return json_encode($datos);
 
 		}
 

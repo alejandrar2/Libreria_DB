@@ -21,9 +21,27 @@
 								
 			);
 
-			$res = $sucursal->add();
+			echo $sucursal->add();
 
 			break;
+
+		case 'editar':
+			$sucursal = new Sucursal($_POST['id'],
+									$_POST['nombre'],
+									$_POST['direccion'],
+									$_POST['telefono'],
+									$_POST['correo']
+								
+			);
+
+			echo $sucursal->editar();
+
+			break;
+
+			case 'remove':
+			echo Sucursal::remove($_POST["id"]);
+				# code...
+				break;
 		
 		default:
 			# code...

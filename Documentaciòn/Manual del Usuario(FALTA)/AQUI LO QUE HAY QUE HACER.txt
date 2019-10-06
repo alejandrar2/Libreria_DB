@@ -1,0 +1,4 @@
+Utilizar herramientas que permiten elaborar un manual de usuario como es el caso de helpndoc (https://www.helpndoc.com/)  
+---El manual de usuario deberá incluir todas las funcionalidades de su proyecto. 
+---Hacer referencia desde el aplicativo al manual de usuario, es decir un enlace o botón siempre visible que llame al manual de usuario. 
+ 
