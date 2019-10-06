@@ -20,7 +20,7 @@
 					                
 			);
 
-			//$registro->add($_POST['libro']);
+			//$res = $registro->add($_POST['idLibro']);
 			//echo $registro->getidregistro();
 
 			echo json_encode($_POST);
