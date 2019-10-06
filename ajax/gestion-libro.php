@@ -20,7 +20,7 @@
 									$_POST['precio'],
 									$_POST['prestar']
 								
-			)
+			);
 			echo $libro->add();
 
 		break;
@@ -33,7 +33,7 @@
 									$_POST['precio'],
 									$_POST['prestar']
 								
-			)
+			);
 			echo $libro->editar();
 			
 		break;
@@ -43,9 +43,10 @@
 			echo Libro::remove($_POST['id']);
 
 		break;
+
+		case 'infoLibro':
+		   echo	Libro::infoLibro();
 		
-		default:
-			# code...
 			break;
 	}
 

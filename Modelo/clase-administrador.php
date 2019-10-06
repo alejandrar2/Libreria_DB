@@ -36,6 +36,22 @@
 				" idEmpleado: " . $this->idEmpleado ;
 		}
 
+		public static function infoAdmi(){
+				include_once 'conexion.php';
+
+				$sql = "SELECT * FROM v_admi";
+				$res = $base_de_datos->query($sql); 
+
+				$datos = [];
+
+    			foreach ($res as $row) {
+        			$datos[] = $row;
+    			}
+
+    			return json_encode($datos);
+
+		}
+
 		public function add(){
 			
 
@@ -48,6 +64,7 @@
 		public static function remove($idAdministrador){
 
 		}
+	}
 
 		
 ?>

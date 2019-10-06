@@ -284,6 +284,21 @@ public static function remove($id){
 
 			return json_encode($datos);
 		}
+		public static function infoLibro(){
+				include_once 'conexion.php';
+
+				$sql = "SELECT * FROM vw_magia";
+				$res = $base_de_datos->query($sql); 
+
+				$datos = [];
+
+    			foreach ($res as $row) {
+        			$datos[] = $row;
+    			}
+
+    			return json_encode($datos);
+
+		}	
 		
 		public static function addRegistro($cliente){
 

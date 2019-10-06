@@ -13,15 +13,17 @@
 			
 			$registro = new Registro(null,null,
 									$_POST['fechafin'],
-									$_POST['idCliente'],
-									$_POST['idAdministrador'],
+									$_POST['cliente'],
+									$_POST['admi'],
 									$_POST['estado'],
-									$_POST['multa']
+									null
 					                
 			);
 
-			$res = $registro->add($_POST['idLibro']);
-			echo $registro->getidregistro();
+			//$res = $registro->add($_POST['idLibro']);
+			//echo $registro->getidregistro();
+
+			echo json_encode($_POST);
 			
 
 			

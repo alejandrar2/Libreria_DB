@@ -112,6 +112,22 @@
 
     			return json_encode($datos);
 
+		}
+
+		public static function infoCliente(){
+				include_once 'conexion.php';
+
+				$sql = "SELECT * FROM v_cliente";
+				$res = $base_de_datos->query($sql); 
+
+				$datos = [];
+
+    			foreach ($res as $row) {
+        			$datos[] = $row;
+    			}
+
+    			return json_encode($datos);
+
 		}	
 
 

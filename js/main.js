@@ -1,11 +1,11 @@
 
-(function ($) {
+/*(function ($) {
     "use strict";
 
 
     /*==================================================================
     [ Focus input ]*/
-    $('.input100').each(function(){
+   /* $('.input100').each(function(){
         $(this).on('blur', function(){
             if($(this).val().trim() != "") {
                 $(this).addClass('has-val');
@@ -19,7 +19,7 @@
   
     /*==================================================================
     [ Validate ]*/
-    var input = $('.validate-input .input100');
+   /* var input = $('.validate-input .input100');
 
     $('.validate-form').on('submit',function(){
         var check = true;
@@ -68,7 +68,7 @@
     
     /*==================================================================
     [ Show pass ]*/
-    var showPass = 0;
+    /*var showPass = 0;
     $('.btn-show-pass').on('click', function(){
         if(showPass == 0) {
             $(this).next('input').attr('type','text');
@@ -81,7 +81,54 @@
             showPass = 0;
         }
         
+    });/*
+
+
+})(jQuery);*/
+
+
+function obtener() {
+    
+    $.ajax({
+        url:"ajax/gestion-libro.php?accion=infoLibro",
+        method: 'GET',
+        dataType:'json',
+        success:function(res){
+            console.log(res);
+            
+            
+        }
     });
+}
 
+function obtenerCliente() {
+    
+    $.ajax({
+        url:"ajax/gestion-cliente.php?accion=infoCliente",
+        method: 'GET',
+        dataType:'json',
+        success:function(res){
+            console.log(res);
+            
+            
+        }
+    });
+}
 
-})(jQuery);
+function obtenerAdmi() {
+    
+    $.ajax({
+        url:"ajax/gestion-cliente.php?accion=infoAdmi",
+        method: 'GET',
+        dataType:'json',
+        success:function(res){
+            console.log(res);
+            
+            
+        }
+    });
+}
+
+function obtener();
+function obtenerAdmi();
+function obtenerCliente();
