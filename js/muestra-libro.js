@@ -22,7 +22,7 @@ function obtenerCliente() {
         success:function(res){
             console.log(res);
             for (var i = 0; i < res.length; i++) {
-               $("#cliente").append(`<option value="${res[i].idCliente}">${res[i].PNombre} ${res[i].SApellido}</option>`)
+               $("#cliente").append(`<option value="${res[i].idCliente}"> ${res[i].PNombre} ${res[i].SApellido}</option>`)
             }
             
             
