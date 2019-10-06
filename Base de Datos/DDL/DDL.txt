@@ -1,0 +1,261 @@
+----TABLA AUTOR
+CREATE TABLE autor (
+  idautor INT NOT NULL /*COMMENT 'Identificador'*/,
+  nombre VARCHAR(45) NULL /*COMMENT 'Nombre del autor'*/ ,
+  descripcion VARCHAR(45) NULL /*COMMENT 'Informacion sobre el autor'*/,
+  PRIMARY KEY (idautor))
+;
+
+----TABLA AUTOR PARA LIBRO
+CREATE TABLE autorparalibro (
+  idautor INT NOT NULL /*COMMENT 'Identificador de autor'*/ ,
+  idibro INT NOT NULL /*COMMENT 'Identificador de libro'*/,
+  PRIMARY KEY (idautor, idibro))
+;
+
+----TABLA EDITORIAL
+CREATE TABLE editorial (
+  ideditorial INT NOT NULL /*COMMENT 'Identificador'*/,
+  nombre VARCHAR(45) NULL /*COMMENT 'Nombre de la editorial'*/ ,
+  direccion VARCHAR(45) NULL /*COMMENT 'Direccion especifica de la editorial'*/,
+  telefono VARCHAR(45) NULL /*COMMENT 'Telefono de la editorial'*/,
+  PRIMARY KEY (ideditorial))
+;
+
+----TABLA EDITORIAL TIENE LIBRO
+CREATE TABLE editorialtienelibro (
+  ideditorial INT NOT NULL /*COMMENT 'Identificador de editorial'*/,
+  libroidlibro INT NOT NULL /*COMMENT 'Identificador de libro'*/ ,
+  PRIMARY KEY (ideditorial, libroidlibro))
+;
+
+----TABLA TIPO PAGO
+CREATE TABLE tipopago (
+  idtipopago INT NOT NULL /*COMMENT 'Identificador'*/,
+  descripcion VARCHAR(45) NULL /*COMMENT 'Tipo de pago'*/ ,
+  idPago INT NOT NULL /*COMMENT 'Identificador de pago'*/,
+  PRIMARY KEY (idtipopago))
+;
+
+----TABLA REGISTRO
+CREATE TABLE Registro (
+  idregistro INT NOT NULL /*COMMENT 'Identificador'*/,
+  fechaInicio DATE NULL DEFAULT NULL /*COMMENT 'Fecha inicio'*/  ,
+  fechaFin DATE NULL DEFAULT NULL /*COMMENT 'Fecha fin'*/ ,
+  idCliente INT NOT NULL /*COMMENT 'Identificador de cliente'*/ ,
+  idAdministrador INT NOT NULL /*COMMENT 'Identificador de administrador'*/,
+  estado VARCHAR(42) NULL /*COMMENT 'Estado del libro'*/,
+  multa FLOAT NULL /*COMMENT 'Cantidad de multad'*/,
+  PRIMARY KEY (idregistro))
+;
+
+----TABLA ADMINISTRADOR
+CREATE TABLE administrador (
+  idAdministrador INT NOT NULL /*COMMENT 'Identificador'*/,
+  idEmpleado INT NOT NULL /*COMMENT 'Identificador de empleado'*/,
+  PRIMARY KEY (idAdministrador))
+;
+
+----TABLA CARGO
+CREATE TABLE cargo (
+  idCargo INT NOT NULL /*COMMENT 'Identificador'*/,
+  Descripcion VARCHAR(45) NULL DEFAULT NULL /*COMMENT' Nombre de cargo'*/ ,
+  PRIMARY KEY (idCargo))
+;
+
+----TABLA CLIENTE
+CREATE TABLE cliente (
+  idCliente INT NOT NULL /*COMMENT 'Identificador'*/,
+  idPersona INT NOT NULL /*COMMENT 'Nombre de cargo'*/,
+  PRIMARY KEY ([idCliente]))
+;
+
+----TABLA COMPROBANTE
+CREATE TABLE comprobante (
+  idComprobante INT NOT NULL /*COMMENT 'Identificador'*/,
+  FechaInicio DATE NULL DEFAULT NULL /*COMMENT 'Fecha de adquisicion de libro'*/,
+  FechaFin DATE NULL DEFAULT NULL /*COMMENT 'Fecha fin de prestamo'*/ ,
+  idCliente INT NOT NULL /*COMMENT 'Identificador de cliente'*/,
+  idAdministrador INT NOT NULL /*COMMENT 'Identificador de administrador'*/ ,
+  PRIMARY KEY (idComprobante))
+;
+
+----TABLA DETALLE DE COMPROBANTE
+CREATE TABLE detalledecomprobante (
+  idDetalle INT NOT NULL /*COMMENT 'Identificador'*/,
+  Cantidad FLOAT NULL DEFAULT NULL /*COMMENT 'Cantidad de libros'*/ ,
+  Multa FLOAT NULL DEFAULT NULL /*COMMENT 'Monto de restraso'*/ ,
+  idComprobante INT NOT NULL /*COMMENT 'Identificador de comprobante'*/ ,
+  PRIMARY KEY (idDetalle))
+;
+
+----TABLA EMAIL
+CREATE TABLE email (
+  idEmail INT NOT NULL /*COMMENT Identificador'*/ ,
+  Descripcion VARCHAR(45) NULL DEFAULT NULL /*COMMENT 'Correo de la persona'*/ ,
+  idPersona INT NULL DEFAULT NULL /*COMMENT 'Identificador de persona'*/,
+  idProveedor INT NULL DEFAULT NULL /*COMMENT 'Identificador de proveedor'*/,
+  PRIMARY KEY (idEmail)
+  )
+;
+
+----TABLA EMPLEADO
+CREATE TABLE empleado (
+  idEmpleado INT NOT NULL /*COMMENT 'Identificador'*/,
+  idPersona INT NOT NULL /*COMMENT 'Identificador de persona'*/ ,
+  PRIMARY KEY (idEmpleado))
+;
+
+-----TABLA EMPLEADO POR CARGO
+CREATE TABLE empleadoporcargo (
+  idEmpleado INT NOT NULL /*COMMENT 'Identificador de empleado'*/,
+  idCargo INT NOT NULL /*COMMENT 'Identificador de cargo'*/ ,
+  FechaNombramiento DATE NULL DEFAULT NULL /*COMMENT 'Inicio del cargo'*/,
+  FechaFin DATE NULL DEFAULT NULL /*COMMENT 'Fin del cargo'*/ )
+;
+
+----TABLA ENTRADAS
+CREATE TABLE entradas (
+  idEntradas INT NOT NULL /*COMMENT Identidicador'*/,
+  cantidad VARCHAR(45) NULL DEFAULT NULL /*COMMENT 'Cantidad de libros que adquiere la libreria'*/ ,
+  precio VARCHAR(45) NULL DEFAULT NULL /*COMMENT 'Precio del libro'*/,
+  PRIMARY KEY (idEntradas))
+;
+
+----TABLA ENTRADAS POR LIBRO
+CREATE TABLE entradasporlibro (
+  idEntradas INT NOT NULL /*COMMENT 'Identificador de entrada'*/ ,
+  idLibro INT NOT NULL /*COMMENT 'Identificador de libro'*/,
+  PRIMARY KEY (idEntradas, idLibro))
+;
+
+----TABLA FACTURA DETALLE
+CREATE TABLE facturadetalle (
+  idFacturaDetalle INT NOT NULL /*COMMENT 'Identificador'*/ ,
+  Cantidad VARCHAR(45) NULL DEFAULT NULL /*COMMENT 'Cantidad de libros a comprar'*/,
+  idFacturaEncabezado INT NOT NULL /*COMMENT 'Identificador del encabezado de la factura'*/ ,
+  idLibro INT NOT NULL /*COMMENT 'Identificador del libro'*/ ,
+  PRIMARY KEY (idFacturaDetalle))
+;
+
+----TABLA FATURA ENCABEZADO
+CREATE TABLE facturaencabezado (
+  idFacturaEncabezado INT NOT NULL /*COMMENT 'Identificador'*/ ,
+  idCliente INT NOT NULL /*COMMENT 'Identificador de cliente'*/,
+  idVendedor INT NOT NULL /*COMMENT 'Identificador de vendedor'*/,
+  Fecha DATE NULL DEFAULT NULL /*COMMENT 'Fecha que se efectua el pago'*/,
+  TotalFactura VARCHAR(45) NULL DEFAULT NULL /*COMMENT 'Cantidad de pago'*/,
+  PRIMARY KEY (idFacturaEncabezado))
+;
+
+----TABLA JEFE
+CREATE TABLE jefe (
+  idJefe INT NOT NULL /*COMMENT 'Identificador'*/ ,
+  idEmpleado INT NOT NULL /*COMMENT 'Identificador de usuario'*/  ,
+  usuario VARCHAR(45) NULL DEFAULT NULL /*COMMENT 'Nombre del usuario'*/ ,
+  contrasenia VARCHAR(45) NULL DEFAULT NULL /*COMMENT 'Contraseña del usuario'*/,
+  PRIMARY KEY (idJefe))
+;
+
+----TABLA LIBRO
+CREATE TABLE libro (
+  idLibro INT NOT NULL /*COMMENT 'Identificador'*/ ,
+  nombre VARCHAR(45) NULL DEFAULT NULL /*COMMENT 'Nombre del libro'*/ ,
+  edicion VARCHAR(45) NULL DEFAULT NULL /*COMMENT 'Ediccion del libro'*/ ,
+  precio FLOAT NULL DEFAULT NULL /*COMMENT 'Precio del libro'*/,
+  Prestar SMALLINT NULL DEFAULT NULL /*COMMENT 'Si el libro puede ser prestado a vivienda o solo local'*/,
+  PRIMARY KEY ([idLibro]))
+;
+
+----TABLA LIBRO REGISTRO
+CREATE TABLE librorregistro (
+  idlibro INT NOT NULL /*COMMENT 'Identificador de libro'*/,
+  idreregistro INT NOT NULL /*COMMENT 'Identificador de registro'*/ )
+;
+
+----TABLA PAGO
+CREATE TABLE pago (
+  idPago INT NOT NULL /*COMMENT 'Identificador'*/,
+  monto FLOAT NULL /*COMMENT 'Tipo de pago'*/,
+  isv FLOAT NULL /*COMMENT 'Monto a efectuar'*/,
+  total FLOAT NULL /*COMMENT 'Cantidad de pago'*/,
+  PRIMARY KEY (idPago))
+;
+
+----TABLA PAGO PARA FACTURA
+CREATE TABLE pagoparafactura (
+  idPago INT NOT NULL /*COMMENT 'Identificador de pago'*/ ,
+  idFacturaEncabezado INT NOT NULL /*COMMENT 'Identificador de factura encabezado'*/ ,
+  PRIMARY KEY (idPago))
+;
+
+----TABLA PERSONA
+CREATE TABLE persona (
+  idPersona INT NOT NULL  /*COMMENT Identificador'*/ ,
+  PNombre VARCHAR(45) NULL DEFAULT NULL /*COMMENT 'Primer nombre de la persona'*/,
+  SNombre VARCHAR(45) NULL DEFAULT NULL /*COMMENT 'Segundo nombre de la persona'*/ ,
+  PApellido VARCHAR(45) NULL DEFAULT NULL /*COMMENT 'Primer apellido de la persona'*/ ,
+  SApellido VARCHAR(45) NULL DEFAULT NULL /*COMMENT 'Segundo apellido de la persona'*/ ,
+  direccion VARCHAR(45) NULL DEFAULT NULL /*COMMENT 'Direccion de vivienda de la persona'*/,
+  numerodeID VARCHAR(45) NULL DEFAULT NULL /*COMMENT 'Numero de identidad de la persona'*/,
+  PRIMARY KEY (idPersona))
+;
+
+----TABLA PROVEEDOR
+CREATE TABLE proveedor (
+  idProveedor INT NOT NULL /*COMMENT 'Identificador'*/ ,
+  Nombre VARCHAR(45) NULL DEFAULT NULL /*COMMENT 'Nombre de la sucursal'*/ ,
+  Direccion VARCHAR(45) NULL DEFAULT NULL /*COMMENT 'Direccion que se encuentra la sucursal'*/,
+  Telefono VARCHAR(45) NULL DEFAULT NULL /*COMMENT 'Telefono de la sucursal'*/ ,
+  PRIMARY KEY (idProveedor))
+;
+
+----TABLA PROVEEDOR POR ENTRAADAS
+CREATE TABLE proveedorporentradas (
+  idProveedor INT NOT NULL /*COMMENT 'Identificador de proveedor'*/ ,
+  idEntradas INT NOT NULL /*COMMENT 'Identificador de entrada'*/,
+  PRIMARY KEY (idProveedor, idEntradas))
+;
+
+----TABLA SUCURSAL
+CREATE TABLE sucursal (
+  idSucursal INT NOT NULL /*COMMENT 'Identificador'*/ ,
+  nombre VARCHAR(45) NULL DEFAULT NULL /*COMMENT 'Nombre de la sucursal'*/ ,
+  direccion VARCHAR(45) NULL DEFAULT NULL /*COMMENT 'Direccion especifica del lugar'*/ ,
+  telefono VARCHAR(45) NULL DEFAULT NULL /*COMMENT 'Telefono de la sucursal'*/,
+  correo VARCHAR(45) NULL DEFAULT NULL /*COMMENT 'Correo de sucursal'*/,
+  PRIMARY KEY (idSucursal))
+;
+
+----TABLA SUCURSALES PARA LIBRO
+CREATE TABLE sucursalesparalibro (
+  idSucursales INT NOT NULL /*COMMENT 'Identificador'*/ ,
+  idLibro INT NOT NULL /*COMMENT 'Identificador de libro'*/,
+  Estante VARCHAR(45) NULL DEFAULT NULL /*COMMENT 'Lugar que se encuntra el libro'*/ ,
+  idSucursal INT NOT NULL )
+;
+
+----TABLA TELEFONO
+CREATE TABLE telefono (
+  idTelefono INT NOT NULL /*COMMENT 'Identificador'*/ ,
+  numero VARCHAR(45) NULL DEFAULT NULL /*COMMENT 'Numero telefonico de la persona'*/ ,
+  idPersona INT NULL DEFAULT NULL /*COMMENT 'Identificador de persona'*/,
+  idProveedor INT NULL DEFAULT NULL /*COMMENT 'Identificador de proveedor'*/,
+  PRIMARY KEY (idTelefono))
+
+;
+
+----TABLA TIPO DE LIBRO
+CREATE TABLE tipodelibro (
+  idTipoDeLibro INT NOT NULL /*COMMENT 'Identificador'*/,
+  Descripcion VARCHAR(45) NULL DEFAULT NULL /*COMMENT 'Tipo de libro'*/,
+  idLibro INT NOT NULL /*COMMENT 'Identificador de libro'*/,
+  PRIMARY KEY (idTipoDeLibro))
+;
+
+----TABLA VENDEDOR
+CREATE TABLE vendedor (
+  idVendedor INT NOT NULL /*COMMENT 'Identificador'*/ ,
+  idEmpleado INT NOT NULL /*COMMENT 'Identificador de empleado'*/,
+  PRIMARY KEY (idVendedor))
+;
