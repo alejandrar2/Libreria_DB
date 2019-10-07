@@ -1,6 +1,8 @@
 <?php 
 
 	include_once('../Modelo/clase-cliente.php');
+	include_once('../Modelo/clase-persona.php');
+
 	
 
 	switch ($_GET["accion"]) {
@@ -15,12 +17,21 @@
 
 		case 'add':
 
-			$cliente = new Cliente(null, 0);
-			$cliente->add();
+			$persona = new Persona(null,
+									$_POST['pnombre'],
+									$_POST['snombre'],
+									$_POST['papellido'],
+									$_POST['sapellido'],
+									$_POST['direccion'],
+									$_POST['numeroid']
+			);
 
-			$cliente = new Cliente(null, $_POST["idPersona"]);
+			$persona->add();
+
+			$cliente = new Cliente(null, $persona->getidPersona());
 			echo $cliente->add();
 
+		
 		break;
 		
 		default:
