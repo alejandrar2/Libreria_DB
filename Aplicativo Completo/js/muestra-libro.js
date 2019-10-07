@@ -1,3 +1,13 @@
+$(document).ready(function(){   
+    obtener();
+    obtenerAdmi();
+    obtenerCliente();
+}); 
+
+
+
+
+
 
 function obtener() {
     
@@ -48,18 +58,26 @@ function venta(){
 
     $('#exampleModalScrollable').modal('show');
 
+   
+}
+
+function guardar(){
+
+    $('#exampleModalScrollable').modal('show');
+
     var param = {
         fechafin: $("#fechafin").val(),
         cliente: $("#cliente").val(),
         admi: $("#admi").val(),
-        estado: $("#estado").val()
+        estado: $("#estado").val(),
+        libro: $("#libro").val()
 
     };
 
     console.log(param);
     
     $.ajax({
-        url:"ajax/gestion-libro.php?accion=add",
+        url:"ajax/gestion-registro.php?accion=add",
         method:"POST",
         dataType:'json',
         data: param,
@@ -70,6 +88,4 @@ function venta(){
 
 }
 
- obtener();
- obtenerAdmi();
- obtenerCliente();
+

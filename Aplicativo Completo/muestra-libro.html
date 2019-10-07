@@ -15,74 +15,74 @@
 			<div class="wrap-login100"></div>
 			
 			<span class="login100-form-logo">
-					<img src="" width="150" ;>
-					
-				</span>
+				<img src="" width="150" ;>
 
-	<div class="container mt-5"  >
-		<div class="card " style="width: 18rem;">
-			<img src="img/libro.jpg" class="card-img-top" alt="...">
-			<div  style="background-color: #FFC107" class="card-body ">
-				<h5 class="card-title">Matematica Basica</h5>
-				<p style="color:#535759" class="card-text">Autor: Gloria Montano<br>Edicion: 12va <br>Precio: 200  </p>
-				<button onclick="venta();" style="background-color: white" class="btn btn-block ">Adquirir</button>
-			</div>
-		</div>
-	</div>
+			</span>
 
-	<!-- Modal -->
-	<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-scrollable" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalScrollableTitle">Registro libro</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-	
-					<input id="fechafin" type="date" class="form-control" placeholder="Fecha Fin">Fecha<br>
-					<label>Clientes</label><br>
-					<select id="cliente" class="form-control" >
-            			<option value="">Morgan</option>
-            			<option value="">Yo</option>
-          			</select>
-
-					<br>
-
-					<label>Administradores</label><br>
-					<select id="admi" class="form-control" >
-            			<option value="">YO</option>
-            			<option value="">MORGAN</option>
-          			</select><br>
-					<input id="estado" type="text" class="form-control" placeholder="Estado">Estado<br>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-					<button onclick="guardar()" type="button" class="btn btn-primary">Guardar cambios</button>
+			<div class="container mt-5"  >
+				<div class="card " style="width: 18rem;">
+					<img src="img/libro.jpg" class="card-img-top" alt="...">
+					<div  style="background-color: #FFC107" class="card-body ">
+						<h5 class="card-title">Matematica Basica</h5>
+						<p style="color:#535759" class="card-text">Autor: Gloria Montano<br>Edicion: 12va <br>Precio: 200  </p>
+						<button onclick="venta();" style="background-color: white" class="btn btn-block ">Adquirir</button>
+					</div>
 				</div>
 			</div>
+
+			<!-- Modal -->
+			<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-scrollable" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalScrollableTitle">Registro libro</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<label>Fecha</label><br>
+							<input id="fechafin" type="date" class="form-control" placeholder="Fecha Fin">
+							<label>Clientes</label><br>
+							<select id="cliente" class="form-control" >
+								<option value="">Morgan</option>
+								<option value="">Yo</option>
+							</select>
+
+							<br>
+
+							<label>Administradores</label><br>
+							<select id="admi" class="form-control" >
+								<option value="">YO</option>
+								<option value="">MORGAN</option>
+							</select><br>
+							<input id="estado" type="text" class="form-control" placeholder="Estado">Estado<br>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+							<button onclick="guardar()" type="button" class="btn btn-primary">Guardar cambios</button>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
+
 	</div>
 </div>
-				
-</div>
-</div>
 
 
 
 
-  	<script src="vendor/jquery/jquery.min.js"></script>
-	
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-	
-	<script src="js/muestra-libro.js"></script>
-	<script type="text/javascript">
+<script src="vendor/jquery/jquery.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script src="js/muestra-libro.js"></script>
+<script type="text/javascript">
 
 
-	</script>
+</script>
 </body>
 </html>
